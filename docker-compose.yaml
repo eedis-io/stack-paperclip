@@ -12,8 +12,8 @@ services:
     volumes:
       - paperclip_db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U paperclip"]
-      interval: 10s
+      test: ["CMD-SHELL", "pg_isready -U paperclip -d paperclip"]
+      interval: 2s
       timeout: 5s
       retries: 30
     networks:
@@ -21,7 +21,6 @@ services:
 
   paperclip:
     image: ${IMAGE:-ghcr.io/paperclipai/paperclip:sha-eefe9f3}
-    restart: unless-stopped
     ports:
       - "${LOCAL_PORT:-3100}:3100"
     environment:
