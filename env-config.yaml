@@ -15,8 +15,8 @@ variables:
 
   defaults:
     - name: IMAGE
-      default: "tuyenvd/paperclip:v2026.403.0"
-      description: "Docker image met tag — update bij upgrades"
+      default: "ghcr.io/paperclipai/paperclip:latest"
+      description: "Docker image — officieel via ghcr.io/paperclipai/paperclip. Gebruik sha-<hash> tag voor een pinned versie."
     - name: PAPERCLIP_DEPLOYMENT_MODE
       default: "authenticated"
       description: "Authentication mode: 'authenticated' or 'unauthenticated'"
@@ -44,7 +44,7 @@ production:
 
 meta:
   version: "v2026.403.0"
-  image: "tuyenvd/paperclip"
+  image: "ghcr.io/paperclipai/paperclip"
   last_upgraded: "2026-04-06"
   docs_sources:
     - url: "https://api.github.com/repos/paperclipai/paperclip/releases?per_page=5"
