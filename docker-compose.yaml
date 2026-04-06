@@ -20,7 +20,7 @@ services:
       - paperclip_net
 
   paperclip:
-    image: ${IMAGE:-ghcr.io/paperclipai/paperclip:latest}
+    image: ${IMAGE:-ghcr.io/paperclipai/paperclip:sha-eefe9f3}
     restart: unless-stopped
     ports:
       - "${LOCAL_PORT:-3100}:3100"

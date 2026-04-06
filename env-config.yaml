@@ -15,8 +15,8 @@ variables:
 
   defaults:
     - name: IMAGE
-      default: "ghcr.io/paperclipai/paperclip:latest"
-      description: "Docker image — officieel via ghcr.io/paperclipai/paperclip. Gebruik sha-<hash> tag voor een pinned versie."
+      default: "ghcr.io/paperclipai/paperclip:sha-eefe9f3"
+      description: "Docker image — officieel via ghcr.io/paperclipai/paperclip. Project publiceert geen versie-tags, pin op SHA."
     - name: PAPERCLIP_DEPLOYMENT_MODE
       default: "authenticated"
       description: "Authentication mode: 'authenticated' or 'unauthenticated'"
