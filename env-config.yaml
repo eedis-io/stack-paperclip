@@ -9,9 +9,9 @@ variables:
       length: 32
       description: "Signing key for authentication sessions"
     - name: POSTGRES_PASSWORD
-      type: password
-      length: 24
-      description: "PostgreSQL password for the paperclip database user"
+      type: hex
+      length: 32
+      description: "PostgreSQL password for the paperclip database user (hex: URL-safe voor DATABASE_URL)"
 
   defaults:
     - name: IMAGE
