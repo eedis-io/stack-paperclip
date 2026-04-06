@@ -30,17 +30,15 @@ entrypoint:
   domain_usage: "Web UI en API endpoint"
 
 local:
-  PORT: "3100"
+  LOCAL_PORT: "3100"
   DOMAIN: "localhost"
   PAPERCLIP_PUBLIC_URL: "http://localhost:3100"
 
 dev:
-  PORT: "443"
   DOMAIN: "{CLIENT_ID}.dev.eedis.io"
   PAPERCLIP_PUBLIC_URL: "https://{CLIENT_ID}.dev.eedis.io"
 
 production:
-  PORT: "443"
   DOMAIN: "{CLIENT_ID}.eedis.io"
   PAPERCLIP_PUBLIC_URL: "https://{CLIENT_ID}.eedis.io"
 
