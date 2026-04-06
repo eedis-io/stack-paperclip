@@ -36,13 +36,13 @@ local:
 
 dev:
   PORT: "443"
-  DOMAIN: "paperclip.{CLIENT_ID}.dev.eedis.io"
-  PAPERCLIP_PUBLIC_URL: "https://paperclip.{CLIENT_ID}.dev.eedis.io"
+  DOMAIN: "{CLIENT_ID}.dev.eedis.io"
+  PAPERCLIP_PUBLIC_URL: "https://{CLIENT_ID}.dev.eedis.io"
 
 production:
   PORT: "443"
-  DOMAIN: "paperclip.{CLIENT_ID}.eedis.io"
-  PAPERCLIP_PUBLIC_URL: "https://paperclip.{CLIENT_ID}.eedis.io"
+  DOMAIN: "{CLIENT_ID}.eedis.io"
+  PAPERCLIP_PUBLIC_URL: "https://{CLIENT_ID}.eedis.io"
 
 meta:
   version: "v2026.403.0"
