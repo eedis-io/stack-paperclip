@@ -1,0 +1,59 @@
+# Paperclip — Open-source orchestration platform for autonomous AI agent teams
+# Gegenereerd door stack-create, bijgehouden in env-config.yaml
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: paperclip
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: paperclip
+    volumes:
+      - paperclip_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paperclip"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+    networks:
+      - paperclip_net
+
+  paperclip:
+    image: ${IMAGE:-tuyenvd/paperclip:v2026.403.0}
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3100}:3100"
+    environment:
+      DATABASE_URL: postgres://paperclip:${POSTGRES_PASSWORD}@db:5432/paperclip
+      PORT: "3100"
+      HOST: "0.0.0.0"
+      SERVE_UI: "true"
+      NODE_ENV: production
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      PAPERCLIP_PUBLIC_URL: ${PAPERCLIP_PUBLIC_URL}
+      PAPERCLIP_DEPLOYMENT_MODE: ${PAPERCLIP_DEPLOYMENT_MODE:-authenticated}
+      PAPERCLIP_DEPLOYMENT_EXPOSURE: ${PAPERCLIP_DEPLOYMENT_EXPOSURE:-private}
+      PAPERCLIP_HOME: /paperclip
+    volumes:
+      - paperclip_data:/paperclip
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3100/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    env_file:
+      - .env.local
+    networks:
+      - paperclip_net
+
+volumes:
+  paperclip_data:
+  paperclip_db_data:
+
+networks:
+  paperclip_net:
+    driver: bridge

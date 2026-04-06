@@ -1,0 +1,61 @@
+version: "1.0"
+platform: dokploy
+type: docker-compose
+
+variables:
+  generated:
+    - name: BETTER_AUTH_SECRET
+      type: hex
+      length: 32
+      description: "Signing key for authentication sessions"
+    - name: POSTGRES_PASSWORD
+      type: password
+      length: 24
+      description: "PostgreSQL password for the paperclip database user"
+
+  defaults:
+    - name: IMAGE
+      default: "tuyenvd/paperclip:v2026.403.0"
+      description: "Docker image met tag — update bij upgrades"
+    - name: PAPERCLIP_DEPLOYMENT_MODE
+      default: "authenticated"
+      description: "Authentication mode: 'authenticated' or 'unauthenticated'"
+    - name: PAPERCLIP_DEPLOYMENT_EXPOSURE
+      default: "private"
+      description: "Deployment exposure: 'private' or 'public'"
+
+entrypoint:
+  service: paperclip
+  port: 3100
+  domain_usage: "Web UI en API endpoint"
+
+local:
+  PORT: "3100"
+  DOMAIN: "localhost"
+  PAPERCLIP_PUBLIC_URL: "http://localhost:3100"
+
+dev:
+  PORT: "443"
+  DOMAIN: "paperclip.{CLIENT_ID}.dev.eedis.io"
+  PAPERCLIP_PUBLIC_URL: "https://paperclip.{CLIENT_ID}.dev.eedis.io"
+
+production:
+  PORT: "443"
+  DOMAIN: "paperclip.{CLIENT_ID}.eedis.io"
+  PAPERCLIP_PUBLIC_URL: "https://paperclip.{CLIENT_ID}.eedis.io"
+
+meta:
+  version: "v2026.403.0"
+  image: "tuyenvd/paperclip"
+  last_upgraded: "2026-04-06"
+  docs_sources:
+    - url: "https://api.github.com/repos/paperclipai/paperclip/releases?per_page=5"
+      type: github_releases
+      note: "Primaire bron voor versies"
+    - url: "https://paperclipai-paperclip.mintlify.app/"
+      type: changelog
+      note: "Officiële documentatie en release notes"
+  upgrade_history:
+    - version: "v2026.403.0"
+      date: "2026-04-06"
+      notes: "Initial stack creation via stack-create"
